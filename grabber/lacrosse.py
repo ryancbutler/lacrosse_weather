@@ -93,12 +93,11 @@ def lacrosse_get_devices(token, locations):
     return devices
 
 
-def lacrosse_get_weather_data(token, device, time_zone="America/Chicago"):
+def lacrosse_get_weather_data(token, device):
     """ Get the weather data for a single device on the La Crosse system
 
     :param token: Current, valid token for user session -- see `lacrosse_login`
     :param device: A device to query weather data from
-    :param time_zone: Valid time zone string
     """
     fields_str = ",".join(device['sensor_field_names']) if device['sensor_field_names'] else None
 
@@ -120,7 +119,7 @@ def lacrosse_get_weather_data(token, device, time_zone="America/Chicago"):
           "{to}" \
           "aggregates={agg}&" \
           "types=spot".format(id=device["device_id"],
-                              fields=fields_str, tz=time_zone,
+                              fields=fields_str, tz=os.getenv('TIMEZONE'),
                               _from=start, to=end, agg=aggregates)
 
     headers = {"Authorization": "Bearer " + token}

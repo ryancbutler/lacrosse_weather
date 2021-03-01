@@ -6,12 +6,13 @@ Credit for original code: https://github.com/keithprickett/lacrosse_weather and 
 ## Steps
 
 ### Needed Variables
-- Either rename sample.env to .env
+- Either rename sample.env to .env and edit (no qoutes around values)
 - Create individual env variables
     - EMAIL
     - PASSWORD
     - SENSORMAIN
     - SENSOROUTSIDE
+    - TIMEZONE
 - Edit docker-compose file directly
 
 ### Run
