@@ -103,7 +103,7 @@ def lacrosse_get_weather_data(token, device):
 
     aggregates = "ai.ticks.1"
     now = datetime.utcnow()
-    #start = str(datetime_to_int_seconds(now - timedelta( seconds=600 )))
+    #start = str(datetime_to_int_seconds(now - timedelta( days=15 )))
     #end = str(datetime_to_int_seconds(now))
     #start = "from={}&".format(start) if start else ""
     #end = "to={}&".format(end) if end else ""
