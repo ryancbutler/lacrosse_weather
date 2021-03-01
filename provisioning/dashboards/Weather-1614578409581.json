@@ -39,6 +39,7 @@
             "mode": "thresholds"
           },
           "custom": {},
+          "decimals": 1,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -75,7 +76,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.4.3",
+      "pluginVersion": "7.3.4",
       "targets": [
         {
           "alias": "Temperature",
@@ -117,6 +118,7 @@
             "mode": "thresholds"
           },
           "custom": {},
+          "decimals": 1,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -157,7 +159,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.4.3",
+      "pluginVersion": "7.3.4",
       "targets": [
         {
           "alias": "Temperature",
@@ -228,7 +230,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "7.4.3",
+      "pluginVersion": "7.3.4",
       "targets": [
         {
           "alias": "Humidity",
@@ -302,7 +304,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.4.3",
+      "pluginVersion": "7.3.4",
       "targets": [
         {
           "groupBy": [],
@@ -349,6 +351,7 @@
             "mode": "thresholds"
           },
           "custom": {},
+          "decimals": 1,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -385,7 +388,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.4.3",
+      "pluginVersion": "7.3.4",
       "targets": [
         {
           "alias": "Temperature",
@@ -464,7 +467,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "7.4.3",
+      "pluginVersion": "7.3.4",
       "targets": [
         {
           "alias": "Humidity",
@@ -539,7 +542,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.4.3",
+      "pluginVersion": "7.3.4",
       "targets": [
         {
           "groupBy": [
@@ -642,7 +645,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.3",
+      "pluginVersion": "7.3.4",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -817,7 +820,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.3",
+      "pluginVersion": "7.3.4",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -959,7 +962,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.3",
+      "pluginVersion": "7.3.4",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1108,7 +1111,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.3",
+      "pluginVersion": "7.3.4",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1359,7 +1362,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.3",
+      "pluginVersion": "7.3.4",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1494,7 +1497,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.3",
+      "pluginVersion": "7.3.4",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1606,6 +1609,7 @@
             "mode": "thresholds"
           },
           "custom": {},
+          "decimals": 1,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -1646,7 +1650,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.4.3",
+      "pluginVersion": "7.3.4",
       "targets": [
         {
           "groupBy": [],
@@ -1691,6 +1695,7 @@
             "mode": "thresholds"
           },
           "custom": {},
+          "decimals": 1,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -1731,7 +1736,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.4.3",
+      "pluginVersion": "7.3.4",
       "targets": [
         {
           "groupBy": [],
@@ -1776,6 +1781,7 @@
             "mode": "thresholds"
           },
           "custom": {},
+          "decimals": 1,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -1816,7 +1822,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.4.3",
+      "pluginVersion": "7.3.4",
       "targets": [
         {
           "groupBy": [],
@@ -1848,14 +1854,15 @@
       "type": "stat"
     }
   ],
-  "schemaVersion": 27,
+  "refresh": "10s",
+  "schemaVersion": 26,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {},
