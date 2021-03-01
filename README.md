@@ -1,4 +1,4 @@
-# La Crosse, Grafana and InfluxDB
+# La Crosse Technology Weather Station, Grafana and InfluxDB
 Docker-compose environment that grabs La Crosse Weather cloud data and displays within a Grafana dashboard
 
 Credit for original code: https://github.com/keithprickett/lacrosse_weather and https://github.com/dbconfession78/py_weather_station
