@@ -1,0 +1,47 @@
+version: "3"
+services:
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    restart: always
+    ports:
+      - 3000:3000
+    networks:
+      - monitoring_network
+    volumes:
+      - grafana-volume:/var/lib/grafana
+      - ./provisioning:/etc/grafana/provisioning
+  influxdb:
+    image: influxdb:1.8
+    container_name: influxdb
+    restart: always
+    ports:
+      - 8086:8086
+    networks:
+      - monitoring_network
+    volumes:
+      - influxdb-volume:/var/lib/influxdb
+    environment:
+      - INFLUXDB_DB=weather #Don't change
+      - INFLUXDB_USER=weather #Don't change
+      - INFLUXDB_USER_PASSWORD=Welcome1 #Don't change
+  grabber:
+    build:
+      context: ./grabber
+      dockerfile: Dockerfile
+    container_name: grabber
+    restart: always
+    depends_on:
+      - "influxdb"
+    networks:
+      - monitoring_network
+    environment:
+      - EMAIL=${EMAIL} #lacrosse email
+      - PASSWORD=${PASSWORD} #lacrosse password
+      - SENSORMAIN=${SENSORMAIN} #lacrosse main sensor (inside unit)
+      - SENSOROUTSIDE=${SENSOROUTSIDE} #lacrosse outsidesensor
+networks:
+  monitoring_network:
+volumes:
+  grafana-volume:
+  influxdb-volume:
