@@ -3,6 +3,8 @@ Docker-compose environment that grabs La Crosse Weather cloud data and displays 
 
 Credit for original code: https://github.com/keithprickett/lacrosse_weather and https://github.com/dbconfession78/py_weather_station
 
+Verified with V50
+
 ## Steps
 
 ### Needed Variables
