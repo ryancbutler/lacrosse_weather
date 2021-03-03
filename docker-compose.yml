@@ -12,9 +12,10 @@ services:
       - grafana-volume:/var/lib/grafana
       - ./provisioning:/etc/grafana/provisioning
     environment:
-      - GF_DATE_FORMATS_INTERVAL_SECOND=hh:mm:ss a
-      - GF_DATE_FORMATS_INTERVAL_MINUTE=hh:mm a
-      - GF_DATE_FORMATS_INTERVAL_HOUR=MMM DD hh:mm a
+      - GF_DATE_FORMATS_INTERVAL_SECOND=h:mm:ss a
+      - GF_DATE_FORMATS_INTERVAL_MINUTE=h:mm a
+      - GF_DATE_FORMATS_INTERVAL_HOUR=MMM DD h:mm a
+      - GF_DATE_FORMATS_FULL_DATE=MMM Do, YYYY @ h:mm:ss a
   influxdb:
     image: influxdb:1.8
     container_name: influxdb
