@@ -1717,7 +1717,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "WinSpeed",
+          "alias": "WindSpeed",
           "groupBy": [
             {
               "params": [
@@ -1839,7 +1839,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
+        "h": 2,
         "w": 2,
         "x": 0,
         "y": 49
@@ -1925,7 +1925,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
+        "h": 2,
         "w": 2,
         "x": 2,
         "y": 49
@@ -1933,17 +1933,16 @@
       "id": 23,
       "options": {
         "colorMode": "value",
-        "graphMode": "none",
+        "graphMode": "area",
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
-            "lastNotNull"
+            "mean"
           ],
-          "fields": "/^Temperature\\.min$/",
-          "values": true
+          "fields": "",
+          "values": false
         },
-        "text": {},
         "textMode": "auto"
       },
       "pluginVersion": "7.3.4",
@@ -1953,7 +1952,7 @@
           "measurement": "Temperature",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT min(\"value\")  *  9/5 +32  FROM \"Temperature\"",
+          "query": "SELECT (min(\"value\")  *  9/5 +32) FROM \"Temperature\"",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -2011,7 +2010,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
+        "h": 2,
         "w": 2,
         "x": 4,
         "y": 49
@@ -2062,6 +2061,259 @@
       ],
       "title": "Wind Max",
       "type": "stat"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {},
+          "decimals": 1,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "yellow",
+                "value": null
+              }
+            ]
+          },
+          "unit": "Time"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Time"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dtdhms"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 2,
+        "x": 0,
+        "y": 51
+      },
+      "id": 40,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Time$/",
+          "values": true
+        },
+        "text": {},
+        "textMode": "value"
+      },
+      "pluginVersion": "7.3.4",
+      "repeat": null,
+      "targets": [
+        {
+          "groupBy": [],
+          "measurement": "Temperature",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT max(\"value\"), temp FROM \"Temperature\" \n",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "max"
+              },
+              {
+                "params": [
+                  " *  9/5 +32 "
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Highest Temp Date",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {},
+          "decimals": 1,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
+          },
+          "unit": "fahrenheit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 2,
+        "x": 2,
+        "y": 51
+      },
+      "id": 41,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "/^Time$/",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.3.4",
+      "targets": [
+        {
+          "groupBy": [],
+          "measurement": "Temperature",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT (min(\"value\")  *  9/5 +32), time FROM \"Temperature\"",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "min"
+              },
+              {
+                "params": [
+                  " *  9/5 +32 "
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Lowest Temp Date",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {},
+          "decimals": 1,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "velocitymph"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 2,
+        "x": 4,
+        "y": 51
+      },
+      "id": 42,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Time$/",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.3.4",
+      "targets": [
+        {
+          "groupBy": [],
+          "measurement": "WindSpeed",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT max(\"value\"), time FROM \"WindSpeed\"",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "max"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Wind Max Date",
+      "type": "stat"
     }
   ],
   "refresh": "10s",
@@ -2072,12 +2324,12 @@
     "list": []
   },
   "time": {
-    "from": "now-24h",
+    "from": "now/d",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Weather",
   "uid": "FTJglUyGz",
-  "version": 2
+  "version": 3
 }
