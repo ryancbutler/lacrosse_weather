@@ -330,6 +330,216 @@
       "type": "stat"
     },
     {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "mappings": [
+            {
+              "from": "0",
+              "id": 1,
+              "text": "N",
+              "to": "20",
+              "type": 2
+            },
+            {
+              "from": "21",
+              "id": 2,
+              "text": "N/NEW",
+              "to": "30",
+              "type": 2
+            },
+            {
+              "from": "31",
+              "id": 3,
+              "text": "NE",
+              "to": "50",
+              "type": 2,
+              "value": "31"
+            },
+            {
+              "from": "51",
+              "id": 4,
+              "text": "E/NE",
+              "to": "70",
+              "type": 2,
+              "value": ""
+            },
+            {
+              "from": "71",
+              "id": 5,
+              "text": "E",
+              "to": "100",
+              "type": 2
+            },
+            {
+              "from": "101",
+              "id": 6,
+              "text": "E/SE",
+              "to": "120",
+              "type": 2
+            },
+            {
+              "from": "121",
+              "id": 7,
+              "text": "SE",
+              "to": "140",
+              "type": 2
+            },
+            {
+              "from": "141",
+              "id": 8,
+              "text": "S/SE",
+              "to": "160",
+              "type": 2
+            },
+            {
+              "from": "161",
+              "id": 9,
+              "text": "S",
+              "to": "190",
+              "type": 2
+            },
+            {
+              "from": "191",
+              "id": 10,
+              "text": "S/SW",
+              "to": "210",
+              "type": 2
+            },
+            {
+              "from": "211",
+              "id": 11,
+              "text": "SW",
+              "to": "230",
+              "type": 2
+            },
+            {
+              "from": "231",
+              "id": 12,
+              "text": "W/SW",
+              "to": "250",
+              "type": 2
+            },
+            {
+              "from": "251",
+              "id": 13,
+              "text": "W",
+              "to": "280",
+              "type": 2
+            },
+            {
+              "from": "281",
+              "id": 14,
+              "text": "W/NW",
+              "to": "300",
+              "type": 2
+            },
+            {
+              "from": "301",
+              "id": 15,
+              "text": "NW",
+              "to": "320",
+              "type": 2
+            },
+            {
+              "from": "321",
+              "id": 16,
+              "text": "N/NW",
+              "to": "340",
+              "type": 2
+            },
+            {
+              "from": "341",
+              "id": 17,
+              "text": "N",
+              "to": "360",
+              "type": 2,
+              "value": ""
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 2,
+        "x": 8,
+        "y": 1
+      },
+      "id": 39,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.3.4",
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "WindHeading",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Wind Heading",
+      "type": "stat"
+    },
+    {
       "collapsed": false,
       "datasource": null,
       "gridPos": {
@@ -1869,5 +2079,5 @@
   "timezone": "",
   "title": "Weather",
   "uid": "FTJglUyGz",
-  "version": 1
+  "version": 2
 }
