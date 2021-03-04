@@ -9,6 +9,7 @@ import json
 import requests
 import time
 import os
+import sys
 from datetime import datetime, timedelta, timezone
 
 from influxdb import InfluxDBClient
@@ -131,64 +132,67 @@ def lacrosse_get_weather_data(token, device):
     return body.get('ref.user-device.' + device['device_id']).get('ai.ticks.1').get('fields')
 
 if __name__ == "__main__":
+    try:
+        email = os.getenv('EMAIL')
+        password = os.getenv('PASSWORD')
 
-    email = os.getenv('EMAIL')
-    password = os.getenv('PASSWORD')
+        username= "weather"
+        inpassword = "Welcome1"
+        retention_policy = 'autogen'
+        database = "weather"
+        retention_policy = 'server_data'
 
-    username= "weather"
-    inpassword = "Welcome1"
-    retention_policy = 'autogen'
-    database = "weather"
-    retention_policy = 'server_data'
-
-    client =  InfluxDBClient(host='influxdb', port=8086, username=username, password=inpassword, database=database)
-    while True:
-        print("Logging in...")
-        token = lacrosse_login(email, password)
-        print("Getting locations...")
-        locations = lacrosse_get_locations(token)
-        print("Getting devices...")
-        devices = lacrosse_get_devices(token, locations)
-    
-        for device in devices:
-            if device['device_name'] == os.getenv('SENSOROUTSIDE'):
-                weather_data = lacrosse_get_weather_data(token, device)
-                series = []
-                for field in weather_data.keys():
-                    print(field)
-                    for value in weather_data[field]['values']:
-                        pointValues = {
-                            "time": datetime.fromtimestamp(value['u'], tz=timezone.utc),
-                            "measurement": field,
-                            "fields": {
-                                "value": value['s'],
-                            },
-                            "tags": {
-                                "location": "outside",
-                            },
-                        }
-                        series.append(pointValues)
-                client.write_points(series)
-            if device['device_name'] == os.getenv('SENSORMAIN'):
-                weather_data = lacrosse_get_weather_data(token, device)
-                series = []
-                for field in weather_data.keys():
-                    print(field)
-                    for value in weather_data[field]['values']:
-                        pointValues = {
-                            "time": datetime.fromtimestamp(value['u'], tz=timezone.utc),
-                            "measurement": ("inside-" + field),
-                            "fields": {
-                                "value": value['s'],
-                            },
-                            "tags": {
-                                "location": "inside",
-                            },
-                        }
-                        series.append(pointValues)
-                client.write_points(series)
-        print("waiting...")
-        time.sleep(30)
+        client =  InfluxDBClient(host='influxdb', port=8086, username=username, password=inpassword, database=database)
+        while True:
+            print("Logging in...")
+            token = lacrosse_login(email, password)
+            print("Getting locations...")
+            locations = lacrosse_get_locations(token)
+            print("Getting devices...")
+            devices = lacrosse_get_devices(token, locations)
+        
+            for device in devices:
+                if device['device_name'] == os.getenv('SENSOROUTSIDE'):
+                    weather_data = lacrosse_get_weather_data(token, device)
+                    series = []
+                    for field in weather_data.keys():
+                        print(field)
+                        for value in weather_data[field]['values']:
+                            pointValues = {
+                                "time": datetime.fromtimestamp(value['u'], tz=timezone.utc),
+                                "measurement": field,
+                                "fields": {
+                                    "value": value['s'],
+                                },
+                                "tags": {
+                                    "location": "outside",
+                                },
+                            }
+                            series.append(pointValues)
+                    client.write_points(series)
+                if device['device_name'] == os.getenv('SENSORMAIN'):
+                    weather_data = lacrosse_get_weather_data(token, device)
+                    series = []
+                    for field in weather_data.keys():
+                        print(field)
+                        for value in weather_data[field]['values']:
+                            pointValues = {
+                                "time": datetime.fromtimestamp(value['u'], tz=timezone.utc),
+                                "measurement": ("inside-" + field),
+                                "fields": {
+                                    "value": value['s'],
+                                },
+                                "tags": {
+                                    "location": "inside",
+                                },
+                            }
+                            series.append(pointValues)
+                    client.write_points(series)
+            print("waiting...")
+            time.sleep(30)
+    except:
+        print("ERROR FOUND. KILLING SCRIPT TO RESTART CONTAINER.")
+        sys.exit(1)
 
 
    
