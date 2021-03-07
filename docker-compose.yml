@@ -16,6 +16,7 @@ services:
       - GF_DATE_FORMATS_INTERVAL_MINUTE=h:mm a
       - GF_DATE_FORMATS_INTERVAL_HOUR=MMM DD h:mm a
       - GF_DATE_FORMATS_FULL_DATE=MMM Do, YYYY @ h:mm:ss a
+      - GF_AUTH_ANONYMOUS_ENABLED=true
   influxdb:
     image: influxdb:1.8
     container_name: influxdb
