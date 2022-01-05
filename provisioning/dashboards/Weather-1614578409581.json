@@ -2349,7 +2349,7 @@
         "x": 2,
         "y": 51
       },
-      "id": 41,
+      "id": 44,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
@@ -2430,7 +2430,7 @@
         "x": 4,
         "y": 51
       },
-      "id": 44,
+      "id": 41,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
@@ -2453,7 +2453,7 @@
           "measurement": "Temperature",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT (min(\"value\")  *  9/5 +32), time FROM \"Temperature\"",
+          "query": "SELECT (max(\"value\")), time FROM \"WindSpeed\"",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "table",
@@ -2534,7 +2534,7 @@
           "measurement": "WindSpeed",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT (min(\"value\")), time FROM \"Temperature\"",
+          "query": "SELECT (min(\"value\")), time FROM \"WindChill\"",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -2567,7 +2567,7 @@
     "list": []
   },
   "time": {
-    "from": "now/d",
+    "from": "now-7d",
     "to": "now"
   },
   "timepicker": {},
