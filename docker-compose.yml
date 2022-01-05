@@ -17,6 +17,7 @@ services:
       - GF_DATE_FORMATS_INTERVAL_HOUR=MMM DD h:mm a
       - GF_DATE_FORMATS_FULL_DATE=MMM Do, YYYY @ h:mm:ss a
       - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_INSTALL_PLUGINS=natel-discrete-panel
   influxdb:
     image: influxdb:1.8
     container_name: influxdb
