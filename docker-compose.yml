@@ -48,6 +48,7 @@ services:
       - SENSORMAIN=${SENSORMAIN} #lacrosse main sensor (inside unit)
       - SENSOROUTSIDE=${SENSOROUTSIDE} #lacrosse outsidesensor
       - TIMEZONE=${TIMEZONE} #Timezone to grabdata for
+      - TZ=${TIMEZONE}
 networks:
   monitoring_network:
 volumes:

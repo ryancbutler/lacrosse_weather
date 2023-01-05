@@ -10,6 +10,7 @@ import requests
 import time
 import os
 import sys
+import traceback
 from datetime import datetime, timedelta, timezone
 
 from influxdb import InfluxDBClient
@@ -101,17 +102,22 @@ def lacrosse_get_weather_data(token, device):
     :param device: A device to query weather data from
     """
     fields_str = ",".join(device['sensor_field_names']) if device['sensor_field_names'] else None
-
     aggregates = "ai.ticks.1"
-    now = datetime.utcnow()
-    #start = str(datetime_to_int_seconds(now - timedelta( days=15 )))
-    #end = str(datetime_to_int_seconds(now))
-    #start = "from={}&".format(start) if start else ""
-    #end = "to={}&".format(end) if end else ""
+    
+    now = datetime.now(timezone.utc)
+    tz_dt = now.astimezone()
+    #Go back records for 1 hour
+    before = tz_dt - timedelta(days=1)
+    start = str(before.isoformat())
+    end = str(tz_dt.isoformat())
+    start = "from={}&".format(start)
+    end = "to={}&".format(end)
 
-    start = "from=&"
-    end = "to=&"
-
+    #Use this if you want as much as you can grab
+    #start = "from=&"
+    #end = "to=&"
+    
+    print("DEVICE ID: " + device["device_id"])
     url = "https://ingv2.lacrossetechnology.com/" \
           "api/v1.1/active-user/device-association/ref.user-device.{id}/" \
           "feed?fields={fields}&" \
@@ -120,9 +126,9 @@ def lacrosse_get_weather_data(token, device):
           "{to}" \
           "aggregates={agg}&" \
           "types=spot".format(id=device["device_id"],
-                              fields=fields_str, tz=os.getenv('TIMEZONE'),
+                              fields=fields_str, tz=os.getenv('TZ'),
                               _from=start, to=end, agg=aggregates)
-
+    print("DATA URL: " + url)
     headers = {"Authorization": "Bearer " + token}
     r = requests.get(url, headers=headers)
     if r.status_code < 200 or r.status_code >= 300:
@@ -156,7 +162,6 @@ if __name__ == "__main__":
                     weather_data = lacrosse_get_weather_data(token, device)
                     series = []
                     for field in weather_data.keys():
-                        print(field)
                         for value in weather_data[field]['values']:
                             pointValues = {
                                 "time": datetime.fromtimestamp(value['u'], tz=timezone.utc),
@@ -191,6 +196,7 @@ if __name__ == "__main__":
             print("waiting...")
             time.sleep(30)
     except:
+        print(traceback.format_exc())
         print("ERROR FOUND. KILLING SCRIPT TO RESTART CONTAINER.")
         sys.exit(1)
 
