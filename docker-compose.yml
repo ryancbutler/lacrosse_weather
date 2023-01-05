@@ -32,6 +32,8 @@ services:
       - INFLUXDB_DB=weather #Don't change
       - INFLUXDB_USER=weather #Don't change
       - INFLUXDB_USER_PASSWORD=Welcome1 #Don't change
+    labels:
+      - docker-volume-backup.stop-during-backup=true
   grabber:
     build:
       context: ./grabber
@@ -49,6 +51,24 @@ services:
       - SENSOROUTSIDE=${SENSOROUTSIDE} #lacrosse outsidesensor
       - TIMEZONE=${TIMEZONE} #Timezone to grabdata for
       - TZ=${TIMEZONE}
+    labels:
+      - docker-volume-backup.stop-during-backup=true
+  backup:
+    image: offen/docker-volume-backup:v2
+    container_name: backup
+    restart: always
+    depends_on:
+      - "influxdb"
+    networks:
+      - monitoring_network
+    environment:
+      BACKUP_FILENAME: backup-%Y-%m-%dT%H-%M-%S.tar.gz
+      BACKUP_LATEST_SYMLINK: backup-latest.tar.gz
+      BACKUP_RETENTION_DAYS: 14
+    volumes:
+      - influxdb-volume:/backup/influxdb-backup:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /mnt/data/backups:/archive
 networks:
   monitoring_network:
 volumes:
