@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grafana
+  template:
+    metadata:
+      labels:
+        app: grafana
+      namespace: lacrosse-weather
+    spec:
+      containers:
+        - env:
+            - name: GF_DATE_FORMATS_INTERVAL_SECOND
+              value: h:mm:ss a
+            - name: GF_DATE_FORMATS_INTERVAL_MINUTE
+              value: h:mm a
+            - name: GF_DATE_FORMATS_INTERVAL_HOUR
+              value: MMM DD h:mm a
+            - name: GF_DATE_FORMATS_FULL_DATE
+              value: MMM Do, YYYY @ h:mm:ss a
+            - name: GF_AUTH_ANONYMOUS_ENABLED
+              value: "true"
+            - name: GF_INSTALL_PLUGINS
+              value: natel-discrete-panel
+          image: grafana/grafana:latest
+          imagePullPolicy: Always
+          name: grafana
+          ports:
+            - containerPort: 3000
+              name: http-grafana
+              protocol: TCP
+          resources: {}
+          volumeMounts:
+            - mountPath: /etc/grafana/provisioning/dashboards/dashboard.yml
+              name: grafana
+              subPath: dashboard.yml
+            - mountPath: /etc/grafana/provisioning/dashboards/Weather.json
+              name: grafana
+              subPath: Weather.json
+            - mountPath: /etc/grafana/provisioning/datasources/automatic.yml
+              name: grafana
+              subPath: automatic.yml
+      restartPolicy: Always
+      volumes:
+        - configMap:
+            defaultMode: 420
+            name: grafana
+          name: grafana

@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: weather
+  namespace: lacrosse-weather
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: weather.internal.techdrabble.com
+    traefik.ingress.kubernetes.io/redirect-entry-point: https
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: weather.internal.techdrabble.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: grafana
+                port:
+                  number: 3000
+            path: /
+            pathType: ImplementationSpecific
+  tls:
+    - hosts:
+        - weather.internal.techdrabble.com

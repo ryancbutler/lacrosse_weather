@@ -95,7 +95,7 @@ def lacrosse_get_devices(token, locations):
     return devices
 
 
-def lacrosse_get_weather_data(token, device):
+def lacrosse_get_weather_data(token, device, asmuch):
     """ Get the weather data for a single device on the La Crosse system
 
     :param token: Current, valid token for user session -- see `lacrosse_login`
@@ -114,8 +114,9 @@ def lacrosse_get_weather_data(token, device):
     end = "to={}&".format(end)
 
     #Use this if you want as much as you can grab
-    #start = "from=&"
-    #end = "to=&"
+    if asmuch is True:
+        start = "from=&"
+        end = "to=&"
     
     print("DEVICE ID: " + device["device_id"])
     url = "https://ingv2.lacrossetechnology.com/" \
@@ -142,6 +143,10 @@ if __name__ == "__main__":
         email = os.getenv('EMAIL')
         password = os.getenv('PASSWORD')
 
+        #get as much data as you can
+        print("Switch asmuch used. Grabbing more data...")
+        asmuch = os.getenv('asmuch', False)
+
         username= "weather"
         inpassword = "Welcome1"
         retention_policy = 'autogen'
@@ -159,7 +164,7 @@ if __name__ == "__main__":
         
             for device in devices:
                 if device['device_name'] == os.getenv('SENSOROUTSIDE'):
-                    weather_data = lacrosse_get_weather_data(token, device)
+                    weather_data = lacrosse_get_weather_data(token, device, asmuch)
                     series = []
                     for field in weather_data.keys():
                         for value in weather_data[field]['values']:

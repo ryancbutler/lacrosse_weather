@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: influxdb
+    app.kubernetes.io/name: influxdb
+  name: influxdb-influxdb-0
+  namespace: lacrosse-weather
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 60Gi
+  storageClassName: synology-iscsi-storage
