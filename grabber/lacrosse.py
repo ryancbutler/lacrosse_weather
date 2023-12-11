@@ -114,7 +114,7 @@ def lacrosse_get_weather_data(token, device, asmuch):
     end = "to={}&".format(end)
 
     #Use this if you want as much as you can grab
-    if asmuch is True:
+    if asmuch == "true":
         print("Switch asmuch used. Grabbing more data...")
         start = "from=&"
         end = "to=&"
@@ -145,7 +145,7 @@ if __name__ == "__main__":
         password = os.getenv('PASSWORD')
 
         #get as much data as you can
-        asmuch = os.getenv('ASMUCH', False) == "True"
+        asmuch = os.getenv('ASMUCH', "false") == "true"
 
         username= "weather"
         inpassword = "Welcome1"
