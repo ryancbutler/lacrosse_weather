@@ -181,7 +181,7 @@ if __name__ == "__main__":
                             series.append(pointValues)
                     client.write_points(series)
                 if device['device_name'] == os.getenv('SENSORMAIN'):
-                    weather_data = lacrosse_get_weather_data(token, device)
+                    weather_data = lacrosse_get_weather_data(token, device, asmuch)
                     series = []
                     for field in weather_data.keys():
                         print(field)
