@@ -145,7 +145,7 @@ if __name__ == "__main__":
         password = os.getenv('PASSWORD')
 
         #get as much data as you can
-        asmuch = os.getenv('ASMUCH', False)
+        asmuch = os.getenv('ASMUCH', False) == "True"
 
         username= "weather"
         inpassword = "Welcome1"
