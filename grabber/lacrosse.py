@@ -95,7 +95,7 @@ def lacrosse_get_devices(token, locations):
     return devices
 
 
-def lacrosse_get_weather_data(token, device, asmuch):
+def lacrosse_get_weather_data(token, device):
     """ Get the weather data for a single device on the La Crosse system
 
     :param token: Current, valid token for user session -- see `lacrosse_login`
@@ -114,10 +114,8 @@ def lacrosse_get_weather_data(token, device, asmuch):
     end = "to={}&".format(end)
 
     #Use this if you want as much as you can grab
-    if asmuch == "true":
-        print("Switch asmuch used. Grabbing more data...")
-        start = "from=&"
-        end = "to=&"
+    #start = "from=&"
+    #end = "to=&"
     
     print("DEVICE ID: " + device["device_id"])
     url = "https://ingv2.lacrossetechnology.com/" \
@@ -144,9 +142,6 @@ if __name__ == "__main__":
         email = os.getenv('EMAIL')
         password = os.getenv('PASSWORD')
 
-        #get as much data as you can
-        asmuch = os.getenv('ASMUCH', "false") == "true"
-
         username= "weather"
         inpassword = "Welcome1"
         retention_policy = 'autogen'
@@ -164,7 +159,7 @@ if __name__ == "__main__":
         
             for device in devices:
                 if device['device_name'] == os.getenv('SENSOROUTSIDE'):
-                    weather_data = lacrosse_get_weather_data(token, device, asmuch)
+                    weather_data = lacrosse_get_weather_data(token, device)
                     series = []
                     for field in weather_data.keys():
                         for value in weather_data[field]['values']:
@@ -181,7 +176,7 @@ if __name__ == "__main__":
                             series.append(pointValues)
                     client.write_points(series)
                 if device['device_name'] == os.getenv('SENSORMAIN'):
-                    weather_data = lacrosse_get_weather_data(token, device, asmuch)
+                    weather_data = lacrosse_get_weather_data(token, device)
                     series = []
                     for field in weather_data.keys():
                         print(field)
@@ -204,7 +199,3 @@ if __name__ == "__main__":
         print(traceback.format_exc())
         print("ERROR FOUND. KILLING SCRIPT TO RESTART CONTAINER.")
         sys.exit(1)
-
-
-   
-

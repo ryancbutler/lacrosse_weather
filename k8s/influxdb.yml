@@ -10,7 +10,6 @@ spec:
     metadata:
       labels:
         app: influxdb
-      namespace: lacrosse-weather
     spec:
       containers:
         - env:

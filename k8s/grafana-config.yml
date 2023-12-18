@@ -2617,4 +2617,3 @@ data:
 kind: ConfigMap
 metadata:
   name: grafana
-  namespace: lacrosse-weather

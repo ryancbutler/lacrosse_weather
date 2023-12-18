@@ -5,7 +5,6 @@ metadata:
     app.kubernetes.io/name: influxdb
     app: influxdb
   name: influxdb
-  namespace: lacrosse-weather
 spec:
   ports:
     - name: influxdb

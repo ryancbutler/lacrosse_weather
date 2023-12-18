@@ -10,7 +10,6 @@ spec:
     metadata:
       labels:
         app: grabber
-      namespace: lacrosse-weather
     spec:
       containers:
         - env:

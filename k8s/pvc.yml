@@ -5,7 +5,6 @@ metadata:
     app: influxdb
     app.kubernetes.io/name: influxdb
   name: influxdb-influxdb-0
-  namespace: lacrosse-weather
 spec:
   accessModes:
     - ReadWriteOnce

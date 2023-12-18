@@ -5,7 +5,6 @@ metadata:
     app.kubernetes.io/name: grafana
     app: grafana
   name: grafana
-  namespace: lacrosse-weather
 spec:
   ports:
     - name: grafana

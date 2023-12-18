@@ -9,7 +9,6 @@ spec:
     metadata:
       labels:
         app: grafana
-      namespace: lacrosse-weather
     spec:
       containers:
         - env:
