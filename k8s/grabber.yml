@@ -1,11 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
+metadata:
+  name: grabber
 spec:
+  progressDeadlineSeconds: 600
   replicas: 1
   revisionHistoryLimit: 3
   selector:
     matchLabels:
       app: grabber
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -43,7 +51,7 @@ spec:
                 secretKeyRef:
                   key: timezone
                   name: grabber
-          image: harbor.internal.techdrabble.com/library/grabber:latest
+          image: harbor.internal.techdrabble.com/library/grabber:0.7.0
           imagePullPolicy: Always
           name: grabber
           ports:
@@ -51,5 +59,10 @@ spec:
               name: grabber
               protocol: TCP
           resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
       restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
       terminationGracePeriodSeconds: 30

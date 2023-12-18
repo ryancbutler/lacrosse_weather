@@ -1,6 +1,5 @@
 namespace: lacrosse-weather
 resources:
-  - grabber.yml
   - grafana-config.yml
   - grafana.yml
   - influxdb.yml
@@ -8,5 +7,6 @@ resources:
   - pvc.yml
   - svc-grafana.yml
   - svc-influxdb.yml
+  #- grabber.yml
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
