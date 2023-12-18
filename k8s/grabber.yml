@@ -51,7 +51,7 @@ spec:
                 secretKeyRef:
                   key: timezone
                   name: grabber
-          image: harbor.internal.techdrabble.com/library/grabber:0.7.0
+          image: harbor.internal.techdrabble.com/library/grabber:0.8.0
           imagePullPolicy: Always
           name: grabber
           ports:
