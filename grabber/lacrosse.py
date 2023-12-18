@@ -199,7 +199,3 @@ if __name__ == "__main__":
         print(traceback.format_exc())
         print("ERROR FOUND. KILLING SCRIPT TO RESTART CONTAINER.")
         sys.exit(1)
-
-
-   
-

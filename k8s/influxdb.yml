@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: influxdb
+  namespace: lacrosse-weather
+spec:
+  podManagementPolicy: OrderedReady
+  replicas: 1
+  selector:
+    matchLabels:
+      app: influxdb
+  serviceName: influxdb
+  template:
+    metadata:
+      labels:
+        app: influxdb
+    spec:
+      containers:
+        - env:
+            - name: INFLUXDB_DB
+              value: weather
+            - name: INFLUXDB_USER
+              value: weather
+            - name: INFLUXDB_USER_PASSWORD
+              value: Welcome1
+          image: influxdb:1.8
+          imagePullPolicy: IfNotPresent
+          name: influxdb
+          ports:
+            - containerPort: 8086
+              name: influxdb
+              protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /var/lib/influxdb
+              name: influxdb
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+  updateStrategy:
+    rollingUpdate:
+      partition: 0
+    type: RollingUpdate
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        labels:
+          app.kubernetes.io/name: influxdb
+        name: influxdb
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 60Gi
+        storageClassName: synology-iscsi-storage
+        volumeMode: Filesystem

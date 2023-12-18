@@ -1,0 +1,12 @@
+namespace: lacrosse-weather
+resources:
+  - grafana-config.yml
+  - grafana.yml
+  - influxdb.yml
+  - ingress.yml
+  - pvc.yml
+  - svc-grafana.yml
+  - svc-influxdb.yml
+  #- grabber.yml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization

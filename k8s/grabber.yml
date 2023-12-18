@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grabber
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: grabber
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: grabber
+    spec:
+      containers:
+        - env:
+            - name: EMAIL
+              valueFrom:
+                secretKeyRef:
+                  key: email
+                  name: grabber
+            - name: PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: grabber
+            - name: SENSORMAIN
+              valueFrom:
+                secretKeyRef:
+                  key: sensormain
+                  name: grabber
+            - name: SENSOROUTSIDE
+              valueFrom:
+                secretKeyRef:
+                  key: sensoroutside
+                  name: grabber
+            - name: TIMEZONE
+              valueFrom:
+                secretKeyRef:
+                  key: timezone
+                  name: grabber
+            - name: TZ
+              valueFrom:
+                secretKeyRef:
+                  key: timezone
+                  name: grabber
+          image: harbor.internal.techdrabble.com/library/grabber:0.7.0
+          imagePullPolicy: Always
+          name: grabber
+          ports:
+            - containerPort: 3000
+              name: grabber
+              protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
