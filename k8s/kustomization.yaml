@@ -1,4 +1,4 @@
-namespace: lacrosse-weather
+#namespace: lacrosse-weather
 resources:
   - grafana-config.yml
   - grafana.yml
