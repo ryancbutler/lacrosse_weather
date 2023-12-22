@@ -5,6 +5,8 @@ Credit for original code: https://github.com/keithprickett/lacrosse_weather and 
 
 Verified with V50
 
+![image](/images/grafana.png)
+
 ## Steps
 
 ### Needed Variables
