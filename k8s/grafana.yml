@@ -31,17 +31,20 @@ spec:
             - name: GF_DATE_FORMATS_FULL_DATE
               value: MMM Do, YYYY @ h:mm:ss a
             - name: GF_AUTH_ANONYMOUS_ENABLED
-              value: 'true'
+              value: "true"
             - name: GF_INSTALL_PLUGINS
               value: natel-discrete-panel
           image: grafana/grafana:latest
           imagePullPolicy: Always
           name: grafana
+          resources:
+            requests:
+              cpu: 90m
+              memory: 175Mi
           ports:
             - containerPort: 3000
               name: http-grafana
               protocol: TCP
-          resources: {}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           volumeMounts:

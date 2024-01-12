@@ -26,11 +26,14 @@ spec:
           image: influxdb:1.8
           imagePullPolicy: IfNotPresent
           name: influxdb
+          resources:
+            requests:
+              cpu: 110m
+              memory: 335Mi
           ports:
             - containerPort: 8086
               name: influxdb
               protocol: TCP
-          resources: {}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           volumeMounts:

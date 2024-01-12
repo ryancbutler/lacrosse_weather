@@ -58,7 +58,10 @@ spec:
             - containerPort: 3000
               name: grabber
               protocol: TCP
-          resources: {}
+          resources:
+            requests:
+              cpu: 40m
+              memory: 56Mi
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
