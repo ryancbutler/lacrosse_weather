@@ -51,7 +51,7 @@ spec:
                 secretKeyRef:
                   key: timezone
                   name: grabber
-          image: harbor.internal.techdrabble.com/library/grabber:1.0.0
+          image: ghcr.io/ryancbutler/lacrosse_weather:latest
           imagePullPolicy: Always
           name: grabber
           ports:
