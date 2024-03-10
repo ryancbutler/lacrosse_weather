@@ -194,7 +194,7 @@ if __name__ == "__main__":
                             series.append(pointValues)
                     client.write_points(series)
             print("waiting...")
-            time.sleep(30)
+            time.sleep(120)
     except:
         print(traceback.format_exc())
         print("ERROR FOUND. KILLING SCRIPT TO RESTART CONTAINER.")
