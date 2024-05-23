@@ -15,7 +15,7 @@ jobs:
   # Push image to GitHub Packages.
   # See also https://docs.docker.com/docker-hub/builds/
   push:
-    runs-on: lacrosse-weather
+    runs-on: arc-runner-weather
     permissions:
       packages: write
       contents: read
